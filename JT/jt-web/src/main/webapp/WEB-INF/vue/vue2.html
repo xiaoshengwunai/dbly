@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>vue练习</title>
+<script src="vue.min.js"></script>
+</head>
+<body>
+	<div id="root">
+	<form>
+    	用户名：<input type="text" v-model="username"><br/>
+    	{{username}}
+		密码：<input type="password" v-model="password"><br/>
+		{{password}}
+		<button type="submit" v-bind:disabled="!username || !password">登录</button>>
+	</form>
+
+	</div>
+<script>
+new Vue({
+  el: '#root',
+  data: {
+    username:'',
+	password:''
+  }
+})
+</script>
+</body>
+</html>

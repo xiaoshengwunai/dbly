@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>vue练习</title>
+<script src="vue.min.js"></script>
+</head>
+<body>
+	<div id="root">
+		<ul>
+			<li v-for="user in users">
+			用户：{{user.name}}  密码：{{user.password}}
+			</li>
+		</ul>
+
+	</div>
+<script>
+new Vue({
+  el: '#root',
+  data: {
+   users:[
+	   {name:"blue",password:"1234"},
+	   {name:"zhangsan",password:"12344"}
+	   ]
+  }
+})
+</script>
+</body>
+</html>

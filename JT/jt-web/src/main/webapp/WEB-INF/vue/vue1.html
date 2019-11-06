@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>vue练习</title>
+<script src="vue.min.js"></script>
+</head>
+<body>
+<div id="root">
+    <input type="checkbox" v-model="checked">我同意<br/>
+    {{checked}}
+	<button type="button" v-bind:disabled="!checked">注册</button>	
+</div>
+	
+<script>
+new Vue({
+  el: '#root',
+  data: {
+    checked:false
+  }
+})
+</script>
+</body>
+</html>

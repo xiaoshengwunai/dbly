@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+	<script src="vue.min.js"></script>
+	<style type="text/css">
+		.tab-pointer{
+		width: 50px;
+		height: 20px;
+		display: inline-block;
+		}
+		.tab-pointer-current{
+		width: 50px;
+		height: 20px;
+		display: inline-block;
+		color:red;
+		}
+		.iconfont{
+		font-size:2px;
+		opacity: 0.3;
+		}
+		.fill-hasrcon{
+		width: 120px;
+		height: 15px;
+		}
+	</style>
+</head>
+<body class="fill center">
+	<div class="tmall" id="tmall">
+		<div class="tmall-tabs-row-space-between">
+			<div v-for="txt,index in tabs" v-bind:class="cur==index?'tab-pointer-current':'tab-pointer'"
+			 @click="cur=index">{{txt}}</div>
+		</div>
+		<div class="tmall-tabbody-container">
+			<div class="tmall-tabbody row space-between">
+				<div class="tabbody">
+					<div class="input-group">
+						<div class="input">
+							<input type="text" placeholder="请输入手机号码 "
+							 class="fill-hasrcon" v-model="mobile"/>
+							 	<i class="iconfont">{{getSP(mobile)}}</i>
+							 <input/>	
+						</div>
+						<div class="select-option" style="display:none"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	new Vue({
+		el:'#tmall',
+		data:{
+			cur:0,
+			tabs:["充话费","充流量","充固话","充宽带"],
+			mobile:'',
+		},
+		methods:{
+			getSP(str){
+				if(str.length!=11){
+					return '';
+				}else if(/^((13[5-9])|(15[89]))/.test(str)){
+					return '中国移动';	
+				}else if(/^(13[02])/.test(str)){
+					return '中国联通';
+				}else if(/^(18[01])/.test(str)){
+					return '中国电信';
+				}else if(/^17/.test(str)){
+					return '虚拟运营商';
+				}else{
+					return '未知';
+				}
+				
+			}
+		}
+	});
+	</script>
+</body>
+</html>

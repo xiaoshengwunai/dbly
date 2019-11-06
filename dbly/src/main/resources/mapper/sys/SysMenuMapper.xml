@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.pj.sys.dao.SysMenuDao">
+
+	<!-- 查询表中所有数据,以及父菜单name,方法1 -->
+	<select id="findMenus1" resultType="map">
+		select c.*,(
+		select name
+		from
+		sys_menus p
+		where id=c.id
+		)
+		from sys_menus c
+	</select>
+	<!-- 查询表中所有数据,以及父菜单name,方法2 -->
+	<select id="findMenus2" resultType="map">
+		select c.*,p.name
+		from
+		sys_menus c
+		left join sys_menus p
+		on c.parentId=p.id
+	</select>
+
+	<!-- 根据id删除指定menu信息 -->
+	<delete id="deleteMenuById">
+		delete from sys_menus
+		where id = #{id}
+	</delete>
+
+	<!-- 查询menu表中所有信息的部分字段封装入类名为Node的Vo对象 -->
+	<select id="findZtreeMenuNodes"
+		resultType="com.cy.pj.sys.common.vo.Node">
+		select id,name,parentId
+		from sys_menus
+	</select>
+
+	<!-- 向menu表insert信息 -->
+	<insert id="insertObject">
+		insert into sys_menus
+		(name,url,type,sort,note,parentId,permission,createdTime,modifiedTime,createdUser,modifiedUser)
+		values(#{name},#{url},#{type},#{sort},#{note},#{parentId},#{permission},now(),now(),#{createdUser},#{modifiedUser})
+	</insert>
+
+	<!-- 根据id更新数据集 -->
+	<update id="updateObject">
+		update sys_menus
+		set
+			name=#{name},
+			type=#{type},
+			sort=#{sort},
+			url=#{url},
+			parentId=#{parentId},
+			permission=#{permission},
+			modifiedUser=#{modifiedUser},
+			modifiedTime=now()
+		where id=#{id}
+	</update>
+
+
+
+</mapper>

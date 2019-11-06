@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>vue练习</title>
+<script src="vue.min.js"></script>
+</head>
+<body>
+	<table class="table" id="tab1">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>标题</th>
+				<th>频道</th>
+				<th>发布时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr v-for="paper in news">
+				<td>{{paper.ID}}</td>
+				<td>{{paper.title}}</td>
+				<td>{{channels[paper.channel]}}</td>
+				<td>{{date(paper.time*1000)}}</td>
+			</tr>
+		</tbody>
+	</table>
+<script>
+	new Vue({
+		el:'#tab1',
+		data:{
+			news:[
+			{
+				"ID":514,
+				"title":"习近平：在改革开放40周年大会上的讲话（现场实录）",
+				"time":1545109421,
+				"channel":"index"
+			},
+			{
+				"ID":515,
+				"title":"第七届军运会近日在武汉市举行",
+				"time":1568914550,
+				"channel":"war"
+			},
+			{
+				"ID":516,
+				"title":"今年的情人节你准备怎么过",
+				"time":1549445214,
+				"channel":"gounei"
+			},
+			{
+				"ID":517,
+				"title":"2018年快要过去，你是否还有未完成的承诺",
+				"time":1545963544,
+				"channel":"gounei"
+			}
+			],
+			channels:{
+				index:'首页',
+				gounei:'国内新闻',
+				war:'军事新闻'
+			}
+		},
+		methods:{
+			date(time){
+				let oDate=new Date(time);
+				return oDate.getFullYear()+'-'+(oDate.getMonth()+1)+'-'+oDate.getDate();
+			}
+		}
+	});
+</script>
+</body>
+</html>
